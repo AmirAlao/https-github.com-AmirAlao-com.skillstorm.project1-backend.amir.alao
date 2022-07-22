@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Manager</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="project.styles.css"/>
+    <style>
+           #home-list{
+            background-color: #f0f4f7;
+           }
+           .box{
+            padding: 50px;
+           }
+           .submit-button{
+            background-color: #f78f20;
+            border: none;
+           }
+
+    </style>
+    <script>
+        var whouse ={};
+
+        // DomCOntentLoaded
+        document.addEventListener("DOMContentLoaded", function(){
+            document.getElementById("new-whouse").addEventListener("submit", function(e){
+            e.preventDefault();
+            var wname = document.getElementById("name").value;
+            var wlocation = document.getElementById("location").value;
+            var wsize = document.getElementById("size").value;
+            warehouse = {name: wname, location: wlocation, size: wsize};
+            console.log(warehouse);
+
+
+            updateTable(warehouse);
+
+            document.getElementById("name").value = null;
+            document.getElementById("location").value = null;
+            document.getElementById("size").value = null;
+
+        });
+
+    });
+
+        var updateTable = function(wstorage){
+            var row = document.createElement("TR");
+            var nameColumn = document.createElement("TD");
+            var locationColumn = document.createElement("TD");
+            var sizeColumn = document.createElement("TD");
+            nameColumn.innerText = wstorage.name;
+            locationColumn.innerText = wstorage.location;
+            sizeColumn.innerText = wstorage.size;
+            row.appendChild(nameColumn);
+            row.appendChild(locationColumn);
+            row.appendChild(sizeColumn);
+            document.getElementById("warehouse_table").appendChild(row);
+            console.log(row);
+        };  
+    </script>
+</head>
+<body>
+    <div class="container-fluid">
+        <div><h1>Warehouses Manager App</h1></div>
+    <div class="row">
+        <div class="col-lg-6">
+            <h2>Add Warehouse</h2>
+            <form id="new-whouse" action="#">
+                <div class="form-group">
+                    <label>Warehouse Name</label>
+                    <input class="form-control" id = "name" type ="text"/>
+                </div>
+
+                <div class="form-group">
+                    <label>Warehouse Location</label>
+                    <input class="form-control" id = "location" type ="text"/>
+                </div>
+                <div class="form-group">
+                    <label>Warehouse Size</label>
+                    <input class="form-control" id = "size" type ="number"/>
+                </div>
+                <div>
+                    <input class="btn btn-primary submit-button" type="submit" value="Save"/>
+                </div>
+            </form>
+        </div>
+        <div id="home-list" class="col-lg-6">
+            <h2>View All Warehouses</h2>
+            <table class="table" id="warehouse_table">
+                <tr><th>warehouse_name</th><th>location</th><th>Size-sqft</th></tr>
+                <tr><td>1234 Oak St</td><td>120000</td><td>100000</td></tr>
+            </table>
+        </div>
+    </div>
+    </div>
+</body>
+</html>
